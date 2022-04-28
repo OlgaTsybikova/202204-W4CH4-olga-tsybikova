@@ -10,6 +10,7 @@ describe("Given a Display component", () => {
       expect(numberElement).toBeInTheDocument();
     });
   });
+
   describe("When it receives a number Array [7, 4, 5, 6]", () => {
     test("Then it should show a string '7456'", () => {
       const givenNumberArray = [7, 4, 5, 6];
@@ -18,14 +19,13 @@ describe("Given a Display component", () => {
       render(
         <PhoneContextProvider value={givenNumberArray}>
           <Display numbers={givenNumberArray} />
-          );
         </PhoneContextProvider>
       );
 
-      const numberElement = screen.getByText("span", {
-        number: expectedResultString,
+      const textElement = screen.getByRole("span", {
+        name: givenNumberArray,
       });
-      expect(numberElement).toBeInTheDocument();
+      expect(textElement).toBeInTheDocument(expectedResultString);
     });
   });
 });
